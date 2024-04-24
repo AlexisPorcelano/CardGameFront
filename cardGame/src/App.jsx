@@ -5,7 +5,7 @@ import { theme } from './theme'
 import { ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Card from './Components/Card';
+import Card from './Components/Card/Card';
 
 function App() {
 
