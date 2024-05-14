@@ -1,25 +1,38 @@
 import image from './ninja.jpg'
 import { Box, Typography, Button } from '@mui/material'
-
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import Card from '../../../Components/Card/Card'
 
 export default function Hand() {
 
-    const cards = [{
-        name: 'Saboteour M-100',
-        type: 'unit',
-        unitType: 'Stealth',
-        gears: 3,
-        effect: 'Look at your opponents hand',
-        atk: 1,
-        hp: 1,
-        agi: 5,
-        image: image
-    }
-    ]
+    const [hand, setHand] = useState([])
 
-    return(
-        <Box>
-            
+    const getCards = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/cards')
+            const { data } = response
+            if (data) {
+                setHand(data)
+            }
+        } catch (error) {
+            window.alert(`Error: ${error.message}`)
+        }
+    }
+
+    useEffect(() => {
+        getCards()
+    }, [])
+
+    useEffect(() => {
+        // console.log(hand);
+    }, [hand])
+
+    return (
+        <Box sx={{display: 'flex'}} >
+            {hand.length > 0 ? hand.map((e, i) => (
+                <Card cardInfo={e} key={i} />
+            )) : null}
         </Box>
     )
 
