@@ -9,6 +9,7 @@ import Card from './Components/Card/Card';
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Game from './Pages/Game/Game'
 import Home from './Pages/Home/Home.jsx'
+import Chat from './Components/chat/Chat.jsx'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/game' element={<Game/>} />
+          <Route path='/chat' element={<Chat/>} />
         </Routes>
       </Box>
     </ThemeProvider>
