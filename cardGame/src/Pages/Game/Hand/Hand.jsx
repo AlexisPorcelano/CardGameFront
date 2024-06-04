@@ -3,6 +3,7 @@ import { Box, Typography, Button } from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Card from '../../../Components/Card/Card'
+import { ENDPOINT } from '../../../utils/constants'
 
 export default function Hand() {
 
@@ -10,7 +11,7 @@ export default function Hand() {
 
     const getCards = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/cards')
+            const response = await axios.get(`${ENDPOINT}/cards`)
             const { data } = response
             if (data) {
                 setHand(data)

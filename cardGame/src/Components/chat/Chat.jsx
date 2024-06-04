@@ -1,6 +1,7 @@
 import { Box, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ENDPOINT } from "../../utils/constants";
 
 export default function Chat() {
 
@@ -10,19 +11,31 @@ export default function Chat() {
     const sendChat = async (message) => {
         try {
             console.log('sending chat');
-            const response = await axios.post('http://localhost:3001/chat', { message });
+            const response = await axios.post(`${ENDPOINT}/chat`, { message });
 
             const { data } = response;
 
-            if (data) {
+            if (data && setNewChat !== "") {
                 console.log('chat sent', data);
-                setChat( data );
-                setNewChat(""); 
+                setChat(data);
+                setNewChat("");
             }
         } catch (error) {
             window.alert(`Error: ${error.message}`);
         }
     };
+
+    const getChat = async () => {
+        try {
+            const response = await axios.get(`${ENDPOINT}/chat`)
+            const { data } = response
+            if (data) {
+                setChat(data)
+            }
+        } catch (error) {
+
+        }
+    }
 
     const handleInputChange = (event) => {
         setNewChat(event.target.value);
@@ -31,6 +44,10 @@ export default function Chat() {
     useEffect(() => {
         console.log(newChat);
     }, [newChat])
+
+    useEffect(() => {
+        getChat()
+    }, [])
 
     return (
         <Box>
@@ -42,12 +59,12 @@ export default function Chat() {
                     : null}
             </Box>
             <Box sx={{ display: "flex", border: "1px solid red" }}>
-                <TextField 
-                    id="newChat" 
-                    label="Send message" 
-                    variant="standard" 
-                    value={newChat} 
-                    onChange={handleInputChange} 
+                <TextField
+                    id="newChat"
+                    label="Send message"
+                    variant="standard"
+                    value={newChat}
+                    onChange={handleInputChange}
                 />
                 <Button onClick={() => sendChat(newChat)}>Send</Button>
             </Box>
