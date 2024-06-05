@@ -10,6 +10,8 @@ export const TURN = 'TURN'
 
 export const LOAD = 'LOAD'
 
+export const CONNECT = 'CONNECT'
+
 export const draw = async (user, quantity) => {
     try {
         const response = await axios.get(`${ENDPOINT}/draw`, { user: user, quantity: quantity })
@@ -23,4 +25,8 @@ export const draw = async (user, quantity) => {
     } catch (error) {
         
     }
+}
+
+export const connect = async () => {
+    
 }
