@@ -17,9 +17,9 @@ function App() {
     <ThemeProvider theme={theme} >
       <Box sx={{border: '1px solid secondary'}} >
         <Routes>
-          <Route path='/' element={<Home/>} />
+          <Route path='/' element={<Chat/>} />
           <Route path='/game' element={<Game/>} />
-          <Route path='/chat' element={<Chat/>} />
+          {/* <Route path='/chat' element={<Chat/>} /> */}
         </Routes>
       </Box>
     </ThemeProvider>
